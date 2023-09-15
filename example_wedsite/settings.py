@@ -27,7 +27,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    GOOGLE_MAPS_API_KEY=(str, 'KEY'),
+    MAILGUN_SMTP_SERVER= (str, 'MAILGUN_SMTP_SERVER'),
+    MAILGUN_SMTP_PORT=(str, 'MAILGUN_SMTP_PORT'),
+    MAILGUN_SMTP_LOGIN=(str, 'MAILGUN_SMTP_LOGIN'),
+    MAILGUN_SMTP_PASSWORD=(str, 'MAILGUN_SMTP_PASSWORD'),
+    SENTRY_DSN=(str,'SENTRY_DSN')
 )
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -166,7 +172,7 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # For Easy Maps
-EASY_MAPS_GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
+EASY_MAPS_GOOGLE_KEY = env('GOOGLE_MAPS_API_KEY')
 EASY_MAPS_CENTER = (-41.3, 32)
 
 # Redirect all HTTP requests to HTTPS. If running in debug mode turn this off,
@@ -176,17 +182,17 @@ SECURE_SSL_REDIRECT = not DEBUG
 #
 # Email preferences. Grab the mailgun ENV variables
 #
-EMAIL_HOST =  os.environ.get('MAILGUN_SMTP_SERVER')
-EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT')
-EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN')
-EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD')
+EMAIL_HOST =  env('MAILGUN_SMTP_SERVER')
+EMAIL_PORT = env('MAILGUN_SMTP_PORT')
+EMAIL_HOST_USER = env('MAILGUN_SMTP_LOGIN')
+EMAIL_HOST_PASSWORD = env('MAILGUN_SMTP_PASSWORD')
 EMAIL_USE_TLS = True
 
 #
 # Raven configuration
 #
 RAVEN_CONFIG = {
-    'dsn': os.environ.get('SENTRY_DSN'),
+    'dsn': env('SENTRY_DSN'),
     'release': 'unspecified', # Currently can't get this working on Heroku
 }
 
