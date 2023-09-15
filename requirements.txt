@@ -1,2 +1,2 @@
-Django==1.11
-django-wedsite>=0.0.10
+Django
+-e git+https://github.com/doiiido/django-wedsite.git#egg=django-wedsite

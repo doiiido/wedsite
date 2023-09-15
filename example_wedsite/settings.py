@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
     'wedsite.io',
     'www.wedsite.io',
     'localhost',
-    '0.0.0.0']
+    '0.0.0.0',
+    '127.0.0.1']
 
 # Change out authentication backend to case-inesnsitive one for users.
 AUTHENTICATION_BACKENDS = ('wedsite.backends.CaseInsensitiveModelBackend', )
@@ -65,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tz_detect.middleware.TimezoneMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'example_wedsite.urls'
@@ -153,7 +156,7 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # For Easy Maps
 EASY_MAPS_GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
