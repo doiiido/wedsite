@@ -165,7 +165,7 @@ $HEROKU_RUN python manage.py createsuperuser
 
 ## Configuration
 
-See the [`django-wedsite` docs](https://github.com/dpipemazo/django-wedsite)
+See the [`django-wedsite` docs](https://github.com/doiiido/django-wedsite)
 for instructions on how to configure the site to your liking.
 
 
