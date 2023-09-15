@@ -14,6 +14,7 @@ import os
 import dj_database_url
 import raven
 import wedsite
+import environ
 from example_wedsite.wedsite_conf import CUSTOMIZED_JSON
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,9 +25,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-DEBUG = (os.environ.get('DEBUG') == 'True')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',

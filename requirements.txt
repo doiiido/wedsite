@@ -1,2 +1,3 @@
 Django
+django-environ
 -e git+https://github.com/doiiido/django-wedsite.git#egg=django-wedsite
